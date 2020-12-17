@@ -27,7 +27,10 @@ namespace BlogApplication.Controllers
         {
             return View();
         }
-
+        public IActionResult Contact()
+        {
+            return View();
+        }
         public IActionResult Admin()
         {
             return View();
