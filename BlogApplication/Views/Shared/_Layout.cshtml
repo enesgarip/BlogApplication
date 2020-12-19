@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    int? id = Context.Session.GetInt32("id");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
