@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlogApplication.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogApplication.Controllers
 {
@@ -20,15 +21,27 @@ namespace BlogApplication.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/AdminPanel/Index");
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/AdminPanel/Index");
+            }
             return View();
         }
         public IActionResult Contact()
         {
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/AdminPanel/Index");
+            }
             return View();
         }
         
