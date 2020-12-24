@@ -12,9 +12,8 @@
     <th scope="col"></th>
     </thead>
     <tbody>
-    <a href="~/AdminPanel/AddBlog"  class="btn btn-success" >Add Blog</a>
-     @if (Model != null)
-      {
+    <a href="/AdminPanel/AddBlog"  class="btn btn-success" >Add Blog</a>
+
         @foreach (var item in Model)
         {
             <tr>
@@ -28,11 +27,11 @@
                     }
                     else
                     {
-                        <a class="btn btn-light" asp-route-id="@item.Id" asp-action="Publish">Publish</a>
+                        <a class="btn btn-light" asp-route-id="@item.Id" asp-controller="AdminPanel" asp-action="Publish">Publish</a>
                     }
                 </td>
             </tr>
          }
-      }
+      
     </tbody>
 </table>

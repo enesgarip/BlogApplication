@@ -1,9 +1,9 @@
 ﻿<form method="POST" id="form">
     <div class="form-group">
-        <input type="text" class="form-control" id="title" placeholder="Başlık">
+        <input type="text" class="form-control" id="title" placeholder="Title">
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" id="subtitle" placeholder="Alt Başlık">
+        <input type="text" class="form-control" id="subtitle" placeholder="Subtitle">
     </div>
     <div id="summernote">
 
@@ -11,10 +11,10 @@
     <div class="form-group">
         <input type="file" class="form-control" name="ImagePath">
     </div>
-    @Html.DropDownList("Categories",null,"Bir kategori seçiniz!",new {@class="form-control"})
+    @Html.DropDownList("Categories",null,"Choose a Category!",new {@class="form-control"})
     <br/>
     <div class="btn-group-toggle">
-        <button type="button" onclick="Save()" class="btn btn-primary">Kaydet</button>
+        <button type="button" onclick="Save()" class="btn btn-primary">Save</button>
     </div>
 
 </form>
@@ -36,13 +36,13 @@
             formData.append("subtitle", subtitle.value);
             formData.append("content", content);
             formData.append("categoryid", category.value);
-            var url = '/Blog/Save';
+            var url = '/AdminPanel/Save';
             fetch(url, {
                     method: 'POST',
                     body: formData
                 }).then(res => res.json())
                 .then(result => {
-                    alert("Blog Kaydedildi!");
+                    alert("Blog Saved!");
                 })
         }
     </script>

@@ -146,7 +146,8 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public IActionResult Blog()
         {
-            return View();
+            var list = _context.Blog.ToList();
+            return View(list);
         }
     }
 }
