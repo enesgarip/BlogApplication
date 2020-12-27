@@ -45,7 +45,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/Admin/AddAuthor" autocomplete="off">
+            <form method="POST" action="/AdminPanel/AddAuthor" autocomplete="off">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="hidden" name="Id" id="Id" class="form-control">
@@ -77,7 +77,7 @@
     <script>
     $(() => clearForm())
     function updateForm(Id){
-      fetch('/Admin/AuthorDetails?Id='+Id)
+      fetch('/AdminPanel/AuthorDetails?Id='+Id)
       .then(res => res.json())
       .then(res =>{
           $('#Id').val(res.id)

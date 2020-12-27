@@ -56,7 +56,7 @@
     <script>
     $(() => clearForm())
     function updateForm(Id){
-      fetch('/Admin/CategoryDetails?Id='+Id)
+      fetch('/AdminPanel/CategoryDetails?Id='+Id)
       .then(res => res.json())
       .then(res =>{
           $('#Id').val(res.id)

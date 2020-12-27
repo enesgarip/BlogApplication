@@ -7,6 +7,7 @@ using BlogApplication.Filters;
 using BlogApplication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace BlogApplication.Controllers
@@ -51,11 +52,14 @@ namespace BlogApplication.Controllers
             var author = _context.Author.FirstOrDefault(w => w.Email == Email && w.Password == Password);
             if (author == null)
             {
-                return RedirectToAction("LoginPage", "Admin");
+                
+                return RedirectToAction("LoginPage","Admin");
             }
-            
-            HttpContext.Session.SetInt32("id", author.Id);
-            return RedirectToAction("Index","AdminPanel");
+            else
+            {
+                HttpContext.Session.SetInt32("id", author.Id);
+                return RedirectToAction("Index", "AdminPanel");
+            }
         }
       
 
@@ -63,7 +67,7 @@ namespace BlogApplication.Controllers
         {
 
             HttpContext.Session.Clear();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Home");
         }
 
     }

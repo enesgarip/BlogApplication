@@ -11,8 +11,8 @@
     <div class="form-group">
         <input type="file" class="form-control" name="ImagePath">
     </div>
-    @Html.DropDownList("Categories",null,"Choose a Category!",new {@class="form-control"})
-    <br/>
+    @Html.DropDownList("Categories", null, "Choose a Category!", new { @class = "form-control" })
+    <br />
     <div class="btn-group-toggle">
         <button type="button" onclick="Save()" class="btn btn-primary">Save</button>
     </div>
@@ -22,7 +22,7 @@
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#summernote').summernote();
         });
         function Save() {
@@ -35,15 +35,16 @@
             formData.append("title", title.value);
             formData.append("subtitle", subtitle.value);
             formData.append("content", content);
-            formData.append("categoryid", category.value);
+            formData.append("categoryId", category.value);
             var url = '/AdminPanel/Save';
             fetch(url, {
-                    method: 'POST',
-                    body: formData
-                }).then(res => res.json())
+                method: 'POST',
+                body: formData
+            }).then(res => res.json())
                 .then(result => {
                     alert("Blog Saved!");
                 })
         }
     </script>
+   
 }

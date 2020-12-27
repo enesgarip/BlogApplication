@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BlogApplication.Models;
 using Microsoft.AspNetCore.Http;
-
+using PagedList;
+using PagedList.Mvc;
 namespace BlogApplication.Controllers
 {
     public class HomeController : Controller
@@ -26,7 +27,7 @@ namespace BlogApplication.Controllers
             {
                 return Redirect("/AdminPanel/Index");
             }
-            var list = _context.Blog.Take(4).Where(b => b.IsPublish).OrderByDescending(x => x.CreateTime).ToList();
+            var list = _context.Blog.OrderByDescending(x=>x.CreateTime).Take(4).Where(b=>b.IsPublish).ToList();
             foreach (var blog in list)
             {
                 blog.Author = _context.Author.Find(blog.AuthorId);
@@ -62,6 +63,19 @@ namespace BlogApplication.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult OlderPosts(int? page)
+        {
+            var list = _context.Blog.OrderByDescending(x => x.CreateTime).Where(b => b.IsPublish).ToList();
+            foreach (var blog in list)
+            {
+                blog.Author = _context.Author.Find(blog.AuthorId);
+            }
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(list.ToPagedList(pageNumber, pageSize));
+            
         }
     }
 }

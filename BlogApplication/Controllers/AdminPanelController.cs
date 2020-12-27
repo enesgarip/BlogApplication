@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using BlogApplication.Filters;
 using BlogApplication.Models;
@@ -24,7 +25,9 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public IActionResult Index()
         {
-            
+            var authorID=HttpContext.Session.GetInt32("id");
+            var author = _context.Author.FirstOrDefault(w => w.Id ==authorID);
+            ViewBag.Message = "Welcome to the system " + author.Name+ " "+ author.Surname;
             return View();
         }
         [UserFilter]
@@ -43,18 +46,21 @@ namespace BlogApplication.Controllers
             return RedirectToAction(nameof(Category));
         }
         [UserFilter]
+       
         public IActionResult Category()
         {
             List<Category> list = _context.Category.ToList();
             return View(list);
         }
         [UserFilter]
+     
         public async Task<IActionResult> CategoryDetails(int Id)
         {
             var category = await _context.Category.FindAsync(Id);
             return Json(category);
         }
         [UserFilter]
+    
         public async Task<IActionResult> DeleteCategory(int? Id)
         {
             Category category = await _context.Category.FindAsync(Id);
@@ -63,6 +69,7 @@ namespace BlogApplication.Controllers
             return RedirectToAction(nameof(Category));
         }
         [UserFilter]
+      
         public async Task<IActionResult> AddAuthor(Author author)
         {
             if (author.Id == 0)
@@ -78,18 +85,21 @@ namespace BlogApplication.Controllers
             return RedirectToAction(nameof(Author));
         }
         [UserFilter]
+   
         public async Task<IActionResult> AuthorDetails(int Id)
         {
             var author = await _context.Author.FindAsync(Id);
             return Json(author);
         }
         [UserFilter]
+     
         public IActionResult Author()
         {
             List<Author> list = _context.Author.ToList();
             return View(list);
         }
         [UserFilter]
+       
         public async Task<IActionResult> DeleteAuthor(int? Id)
         {
             var author = await _context.Author.FindAsync(Id);
@@ -110,10 +120,12 @@ namespace BlogApplication.Controllers
             return View();
         }
         [UserFilter]
+    
         public IActionResult Publish(int Id)
         {
             var blog = _context.Blog.Find(Id);
             blog.IsPublish = true;
+            blog.CreateTime=DateTime.Now;
             _context.Update(blog);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -122,7 +134,7 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public async Task<IActionResult> Save(Blog model)
         {
-            
+           
             if (model != null)
             {
                 var file = Request.Form.Files.First();
@@ -134,20 +146,21 @@ namespace BlogApplication.Controllers
                     await file.CopyToAsync(fileStream);
                 }
                 model.ImagePath = fileName;
-                model.AuthorId = (int)HttpContext.Session.GetInt32("id");
-                await _context.AddAsync(model);
+                model.AuthorId = (int) HttpContext.Session.GetInt32("id");
+                await _context.AddAsync(model); 
                 await _context.SaveChangesAsync();
                 return Json(true);
-
+                
             }
-
             return Json(false);
         }
+
         [UserFilter]
         public IActionResult Blog()
         {
             var list = _context.Blog.ToList();
             return View(list);
         }
+
     }
 }

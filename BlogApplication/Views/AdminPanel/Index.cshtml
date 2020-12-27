@@ -1,4 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Admin Panel";
-}
-<p>Admin Panel</p>
+﻿@using Microsoft.AspNetCore.Http
+@{
+        ViewData["Title"] = "Admin Panel";
+    }
+    <body style="text-align: center; color: azure">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <p>@ViewBag.Message</p>
+                <p>From the navigation bar, you can surf on Admin Panel.</p>
+            </div>
+        </div>
+    </body>

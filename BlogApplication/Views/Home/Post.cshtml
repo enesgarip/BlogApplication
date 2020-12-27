@@ -1,5 +1,7 @@
 ﻿@model BlogApplication.Models.Blog
-   
+@{
+    ViewData["Title"] = @Model.Title;
+}
 <header class="masthead" style="background-image: url('@Model.ImagePath')">
     <div class="overlay"></div>
     <div class="container">
