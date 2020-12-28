@@ -55,7 +55,7 @@ namespace BlogApplication.Controllers
         {
             if (HttpContext.Session.GetInt32("id").HasValue)
             {
-                return Redirect("/ AdminPanel / Index");
+                return Redirect("/AdminPanel/Index");
             }
             var blog = _context.Blog.Find(Id);
             blog.Author = _context.Author.Find(blog.AuthorId);
