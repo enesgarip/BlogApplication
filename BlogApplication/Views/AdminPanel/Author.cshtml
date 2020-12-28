@@ -1,13 +1,14 @@
-﻿
+﻿@Html.ValidationSummary(false)
+@using System.Reflection.Metadata
 @model IEnumerable<BlogApplication.Models.Author>
 @{
     ViewData["Title"] = "Author";
-   
+
 }
 
 <button type="button" onclick="$('#AuthorModal').modal('show')" class="btn btn-primary">Add Author</button>
 
-<table class="table table-hover">
+<table class="table table-hover" id="table">
     <thead>
     <th scope="col">Id</th>
     <th scope="col">Name</th>
@@ -73,33 +74,34 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     <script>
-    $(() => clearForm())
-    function updateForm(Id){
-      fetch('/AdminPanel/AuthorDetails?Id='+Id)
-      .then(res => res.json())
-      .then(res =>{
-          $('#Id').val(res.id)
-          $('#Name').val(res.name)
-          $('#Surname').val(res.surname)
-          $('#Password').val(res.password)
-          $('#Email').val(res.email)
-          $('#isAdmin').val(res.isAdmin)
-      })
-      $('#saveBtn').hide();
-       $('#updateBtn').show();
-      $('#AuthorModal').modal('show');
-    }
-    function clearForm(){
-        $('#Id').val(null)
-          $('#Name').val(null)
+        $(() => clearForm())
+        function updateForm(Id) {
+            fetch('/AdminPanel/AuthorDetails?Id=' + Id)
+                .then(res => res.json())
+                .then(res => {
+                    $('#Id').val(res.id)
+                    $('#Name').val(res.name)
+                    $('#Surname').val(res.surname)
+                    $('#Password').val(res.password)
+                    $('#Email').val(res.email)
+                    $('#isAdmin').val(res.isAdmin)
+                })
+            $('#saveBtn').hide();
+            $('#updateBtn').show();
+            $('#AuthorModal').modal('show');
+        }
+        function clearForm() {
+            $('#Id').val(null)
+            $('#Name').val(null)
             $('#Surname').val(null)
-          $('#Password').val(null)
-        $('#Email').val(null)
-        $('#isAdmin').val(null)
-       $('#saveBtn').show();
-       $('#updateBtn').hide();
-    }
+            $('#Password').val(null)
+            $('#Email').val(null)
+            $('#isAdmin').val(null)
+            $('#saveBtn').show();
+            $('#updateBtn').hide();
+        }
     </script>
 }

@@ -72,17 +72,20 @@ namespace BlogApplication.Controllers
       
         public async Task<IActionResult> AddAuthor(Author author)
         {
-            if (author.Id == 0)
-            {
-                await _context.AddAsync(author);
-            }
-            else
-            {
-                _context.Update(author);
-            }
-            await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Author));
+            if (author.Id == 0)
+                {
+                    await _context.AddAsync(author);
+                }
+                else
+                {
+                    _context.Update(author);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Author));
+            
         }
         [UserFilter]
    

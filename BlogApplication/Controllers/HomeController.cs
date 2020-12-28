@@ -67,6 +67,10 @@ namespace BlogApplication.Controllers
 
         public IActionResult OlderPosts(int? page)
         {
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/AdminPanel/Index");
+            }
             var list = _context.Blog.OrderByDescending(x => x.CreateTime).Where(b => b.IsPublish).ToList();
             foreach (var blog in list)
             {
