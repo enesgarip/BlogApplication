@@ -33,17 +33,8 @@ namespace BlogApplication.Controllers
             return View();
         }
 
-       
-        public IActionResult LoginPage()
-        {
-            if (HttpContext.Session.GetInt32("id").HasValue)
-            {
-                return Redirect("/AdminPanel/Index");
-            }
-            return View();
-        }
 
-        public IActionResult Login(string Email, string Password)
+        public IActionResult LoginPage(string Email, string Password)
         {
             if (HttpContext.Session.GetInt32("id").HasValue)
             {
@@ -52,8 +43,7 @@ namespace BlogApplication.Controllers
             var author = _context.Author.FirstOrDefault(w => w.Email == Email && w.Password == Password);
             if (author == null)
             {
-                
-                return RedirectToAction("LoginPage","Admin");
+                return View();
             }
             else
             {

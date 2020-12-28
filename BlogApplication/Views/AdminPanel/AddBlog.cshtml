@@ -1,22 +1,27 @@
-﻿<form method="POST" id="form">
-    <div class="form-group">
-        <input type="text" class="form-control" id="title" placeholder="Title">
-    </div>
-    <div class="form-group">
-        <input type="text" class="form-control" id="subtitle" placeholder="Subtitle">
-    </div>
-    <div id="summernote">
+﻿@{
+    ViewData["Title"] = "Add Blog";
+}
+<form method="POST" id="form">
+    <div>
 
+        <div class="form-group">
+            <input type="text" class="form-control" id="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="subtitle" placeholder="Subtitle">
+        </div>
+        <div id="summernote">
+            
+        </div>
+        <div class="form-group">
+            <input type="file" class="form-control" name="ImagePath">
+        </div>
+        @Html.DropDownList("Categories", null, "Choose a Category!", new {@class = "form-control"})
+        <br/>
+        <div class="btn-group-toggle">
+            <button type="button" onclick="Save()" class="btn btn-primary">Save</button>
+        </div>
     </div>
-    <div class="form-group">
-        <input type="file" class="form-control" name="ImagePath">
-    </div>
-    @Html.DropDownList("Categories", null, "Choose a Category!", new { @class = "form-control" })
-    <br />
-    <div class="btn-group-toggle">
-        <button type="button" onclick="Save()" class="btn btn-primary">Save</button>
-    </div>
-
 </form>
 
 @section Scripts{
