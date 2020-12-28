@@ -53,6 +53,10 @@ namespace BlogApplication.Controllers
         }
         public IActionResult Post(int Id)
         {
+            if (HttpContext.Session.GetInt32("id").HasValue)
+            {
+                return Redirect("/ AdminPanel / Index");
+            }
             var blog = _context.Blog.Find(Id);
             blog.Author = _context.Author.Find(blog.AuthorId);
             blog.ImagePath = "/img/" + blog.ImagePath;

@@ -33,6 +33,10 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public async Task<IActionResult> AddCategory(Category category)
         {
+            if (category.Name == null)
+            {
+                return RedirectToAction(nameof(Category));
+            }
             if (category.Id == 0)
             {
                 await _context.AddAsync(category);
@@ -72,19 +76,20 @@ namespace BlogApplication.Controllers
       
         public async Task<IActionResult> AddAuthor(Author author)
         {
-
-            if (author.Id == 0)
-                {
-                    await _context.AddAsync(author);
-                }
-                else
-                {
-                    _context.Update(author);
-                }
-
-                await _context.SaveChangesAsync();
-
+            if (author.Name==null || author.Surname==null || author.Email==null || author.Password==null)
+            {
                 return RedirectToAction(nameof(Author));
+            }
+            if (author.Id == 0)
+            {
+                    await _context.AddAsync(author);
+            }
+            else 
+            {
+                    _context.Update(author);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Author));
             
         }
         [UserFilter]
@@ -137,7 +142,10 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public async Task<IActionResult> Save(Blog model)
         {
-           
+            if (model.Title==null || model.Subtitle==null || model.ImagePath==null || model.Content==null || model.Category==null)
+            {
+                return RedirectToAction(nameof(Blog));
+            }
             if (model != null)
             {
                 var file = Request.Form.Files.First();
@@ -161,7 +169,9 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public IActionResult Blog()
         {
+
             var list = _context.Blog.ToList();
+
             return View(list);
         }
 
