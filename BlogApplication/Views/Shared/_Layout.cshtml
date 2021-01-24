@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"id="navbar1">
             <div class="container">
                 <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                    <img src="~/img/siyah.jpeg" title="Homepage" alt="" width="100" height="100" id="logo1" />
+                    <img src="~/img/siya2.png" title="Homepage" alt="" width="100" height="100" id="logo1" />
                 </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -62,7 +62,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"id="navbar2">
             <div class="container">
                 <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                    <img src="~/img/siyah.jpeg" title="Homepage" alt="" width="100" height="100" id="logo2"/>
+                    <img src="~/img/siya2.png" title="Homepage" alt="" width="100" height="100" id="logo2"/>
                 </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -95,7 +95,7 @@
             </ul>
         </nav>
     }
-    <div class="col-auto">
+    <div class="col-auto" id="body">
 
         @RenderBody()
 
@@ -150,7 +150,6 @@
      if (document.getElementById('href2').getAttribute('href') ==='/vendor/bootstrap/css/bootstrap.min.css') {
          document.getElementById('href2').setAttribute('href', "/vendor/bootstrap/css/bootstrap_cyborg.css");
          document.querySelector('#modeButton').innerText = 'Light';
-
      }
      else {
          document.getElementById('href2').setAttribute('href', "/vendor/bootstrap/css/bootstrap.min.css");

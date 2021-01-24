@@ -142,10 +142,7 @@ namespace BlogApplication.Controllers
         [UserFilter]
         public async Task<IActionResult> Save(Blog model)
         {
-            if (model.Title==null || model.Subtitle==null || model.ImagePath==null || model.Content==null || model.Category==null)
-            {
-                return RedirectToAction(nameof(Blog));
-            }
+ 
             if (model != null)
             {
                 var file = Request.Form.Files.First();

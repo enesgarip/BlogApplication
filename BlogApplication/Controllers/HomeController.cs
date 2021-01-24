@@ -9,6 +9,7 @@ using BlogApplication.Models;
 using Microsoft.AspNetCore.Http;
 using PagedList;
 using PagedList.Mvc;
+
 namespace BlogApplication.Controllers
 {
     public class HomeController : Controller
@@ -82,7 +83,7 @@ namespace BlogApplication.Controllers
             }
             int pageSize = 8;
             int pageNumber = (page ?? 1);
-            return View(list.ToPagedList(pageNumber, pageSize));
+            return View(list.ToPagedList(pageNumber,pageSize));
             
         }
     }
